@@ -1,4 +1,4 @@
-# textlint-rule-filter-whitelist
+# textlint-filter-rule-whitelist
 
 textlint filter rule that filter any word by white list.
 
@@ -6,7 +6,7 @@ textlint filter rule that filter any word by white list.
 
 Install with [npm](https://www.npmjs.com/):
 
-    npm install textlint-rule-filter-whitelist
+    npm install textlint-filter-rule-whitelist
 
 ## Usage
 
@@ -32,7 +32,7 @@ Via `.textlintrc`(Recommended)
     
 ### RegExp String
 
-textlint-rule-filter-whitelist allow to use RegExp like string.
+textlint-filter-rule-whitelist allow to use RegExp like string.
 The string is stated with `/` and ended with `/`.
 
 ```js
@@ -41,7 +41,7 @@ The string is stated with `/` and ended with `/`.
 
 ## Changelog
 
-See [Releases page](https://github.com/textlint/textlint-rule-filter-whitelist/releases).
+See [Releases page](https://github.com/textlint/textlint-filter-rule-whitelist/releases).
 
 ## Running tests
 
@@ -53,7 +53,7 @@ Install devDependencies and Run `npm test`:
 
 Pull requests and stars are always welcome.
 
-For bugs and feature requests, [please create an issue](https://github.com/textlint/textlint-rule-filter-whitelist/issues).
+For bugs and feature requests, [please create an issue](https://github.com/textlint/textlint-filter-rule-whitelist/issues).
 
 1. Fork it!
 2. Create your feature branch: `git checkout -b my-new-feature`

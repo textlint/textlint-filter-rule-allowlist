@@ -2,7 +2,7 @@
 "use strict";
 const TextLintCore = require("textlint").TextLintCore;
 const TextLintNodeType = require("textlint").TextLintNodeType;
-import filterRule from "../src/textlint-rule-filter-whitelist";
+import filterRule from "../src/textlint-filter-rule-whitelist";
 import reportRule from "textlint-rule-report-node-types";
 const assert = require("power-assert");
 describe("textlint-rule-filter-whitelist", function() {

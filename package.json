@@ -1,22 +1,22 @@
 {
-  "name": "textlint-rule-filter-whitelist",
+  "name": "textlint-filter-rule-whitelist",
   "repository": {
     "type": "git",
-    "url": "https://github.com/textlint/textlint-rule-filter-whitelist.git"
+    "url": "https://github.com/textlint/textlint-filter-rule-whitelist.git"
   },
   "author": "azu",
   "email": "azuciao@gmail.com",
-  "homepage": "https://github.com/textlint/textlint-rule-filter-whitelist",
+  "homepage": "https://github.com/textlint/textlint-filter-rule-whitelist",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/textlint/textlint-rule-filter-whitelist/issues"
+    "url": "https://github.com/textlint/textlint-filter-rule-whitelist/issues"
   },
   "files": [
     "src/",
     "lib/"
   ],
   "version": "1.0.1",
-  "main": "lib/textlint-rule-filter-whitelist.js",
+  "main": "lib/textlint-filter-rule-whitelist.js",
   "directories": {
     "test": "test"
   },
