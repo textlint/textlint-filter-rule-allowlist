@@ -1,6 +1,6 @@
 # textlint-filter-rule-whitelist
 
-textlint filter rule that filter any word by white list.
+textlint [filter rule](https://github.com/textlint/textlint/blob/master/docs/filter-rule.md "Filter rule") that filter any word by white list.
 
 ## Install
 
@@ -38,6 +38,13 @@ The string is stated with `/` and ended with `/`.
 ```js
 "/\\d+/"; // => /\d+/
 ```
+
+**Limitation**:
+
+Currently, `/regexp/` to be `/regexp/g`.
+It means that this filter rule is not supported multiline RegExp `/regexp/m`.
+
+Welcome to Pull Request!
 
 ## Changelog
 
