@@ -1,5 +1,7 @@
 # textlint-filter-rule-whitelist
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/textlint/textlint-filter-rule-whitelist.svg)](https://greenkeeper.io/)
+
 textlint [filter rule](https://github.com/textlint/textlint/blob/master/docs/filter-rule.md "Filter rule") that filter any word by white list.
 
 ## Install
