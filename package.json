@@ -46,6 +46,7 @@
   },
   "dependencies": {
     "escape-string-regexp": "^1.0.5",
-    "execall": "^1.0.0"
+    "execall": "^1.0.0",
+    "str-to-regexp": "^1.1.3"
   }
 }

@@ -4,6 +4,7 @@ const TextLintCore = require("textlint").TextLintCore;
 const TextLintNodeType = require("textlint").TextLintNodeType;
 import filterRule from "../src/textlint-filter-rule-whitelist";
 import reportRule from "textlint-rule-report-node-types";
+
 const assert = require("power-assert");
 describe("textlint-rule-filter-whitelist", function() {
     context("when report and filter type", function() {
@@ -23,7 +24,7 @@ describe("textlint-rule-filter-whitelist", function() {
                     allow: ["text"]
                 }
             });
-            return textlint.lintText("text").then(({messages}) => {
+            return textlint.lintText("text").then(({ messages }) => {
                 assert.equal(messages.length, 0);
             });
         });
@@ -45,7 +46,7 @@ describe("textlint-rule-filter-whitelist", function() {
                     allow: ["`\\d\+`"]
                 }
             });
-            return textlint.lintMarkdown("white `1234` text").then(({messages}) => {
+            return textlint.lintMarkdown("white `1234` text").then(({ messages }) => {
                 assert.equal(messages.length, 1);
             });
         });
@@ -65,11 +66,38 @@ describe("textlint-rule-filter-whitelist", function() {
                     allow: ["/`\\d+`/"]
                 }
             });
-            return textlint.lintMarkdown("white `1234` text").then(({messages}) => {
+            return textlint.lintMarkdown("white `1234` text").then(({ messages }) => {
                 assert.equal(messages.length, 0);
             });
         });
 
+        it("should messages is ignore by RegExp + flag", function() {
+            const textlint = new TextLintCore();
+            textlint.setupRules({
+                report: reportRule
+            }, {
+                report: {
+                    nodeTypes: [TextLintNodeType.Paragraph]
+                }
+            });
+            textlint.setupFilterRules({
+                whitelist: filterRule
+            }, {
+                whitelist: {
+                    allow: [
+                        "/^={1,4}\\s/m",
+                        "This is not error."
+                    ]
+                }
+            });
+            return textlint.lintMarkdown("This is error.=== Title").then(({ messages }) => {
+                assert.equal(messages.length, 1);
+            }).then(() => {
+                return textlint.lintMarkdown("This is not error.\n\n=== Title").then(({ messages }) => {
+                    assert.equal(messages.length, 0);
+                });
+            })
+        });
         it("should messages is ignore by RegExp", function() {
             const textlint = new TextLintCore();
             textlint.setupRules({
@@ -86,7 +114,7 @@ describe("textlint-rule-filter-whitelist", function() {
                     allow: ["/{{\.*\?}}/"]
                 }
             });
-            return textlint.lintMarkdown("{{book.console}}").then(({messages}) => {
+            return textlint.lintMarkdown("{{book.console}}").then(({ messages }) => {
                 assert.equal(messages.length, 0);
             });
         });

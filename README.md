@@ -18,7 +18,8 @@ Via `.textlintrc`(Recommended)
         "whitelist": {
             "allow": [
                 "ignored-word",
-                "/\\d+/"
+                "/\\d+/",
+                "/^===/m"
             ]
         }
     }
@@ -33,18 +34,15 @@ Via `.textlintrc`(Recommended)
 ### RegExp String
 
 textlint-filter-rule-whitelist allow to use RegExp like string.
-The string is stated with `/` and ended with `/`.
+The string is stated with `/` and ended with `/` or `/flag`.
 
 ```js
 "/\\d+/"; // => /\d+/
 ```
 
-**Limitation**:
+**Note**:
 
-Currently, `/regexp/` to be `/regexp/g`.
-It means that this filter rule is not supported multiline RegExp `/regexp/m`.
-
-Welcome to Pull Request!
+Multiline pattern should be use `m` flag like `/regexp/m`.
 
 ## Changelog
 
