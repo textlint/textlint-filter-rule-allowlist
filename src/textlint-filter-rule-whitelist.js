@@ -26,7 +26,7 @@ const getAllowWordsFromFiles = (files, baseDirectory) => {
 const COMPLEX_REGEX_END = /^.+\/(\w*)$/;
 const defaultOptions = {
     /**
-     * white list strings or RegExp strings
+     * White list strings or RegExp strings
      * For example, you can specify following.
      *
      * [
@@ -37,18 +37,18 @@ const defaultOptions = {
      */
     allow: [],
     /**
-     * white list file paths
+     * file path list that includes allow words.
      */
-    allowPaths: []
+    whitelistConfigPaths: []
 };
 module.exports = function(context, options) {
     const { Syntax, shouldIgnore, getSource } = context;
     const baseDirectory = context.getConfigBaseDir();
     const allowWords = options.allow || defaultOptions.allow;
-    const allowFileContents = options.allowPaths
-        ? getAllowWordsFromFiles(options.allowPaths, baseDirectory)
+    const whitelistConfigPaths = options.whitelistConfigPaths
+        ? getAllowWordsFromFiles(options.whitelistConfigPaths, baseDirectory)
         : [];
-    const allAllowWords = allowWords.concat(allowFileContents);
+    const allAllowWords = allowWords.concat(whitelistConfigPaths);
     const regExpWhiteList = allAllowWords.map(allowWord => {
         if (!allowWord) {
             return /^$/;

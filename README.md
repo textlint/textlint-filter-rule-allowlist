@@ -30,8 +30,8 @@ Via `.textlintrc`(Recommended)
 
 - `allow`: `string[]`
     - white list words or RegExp strings
-- `allowPaths`: `string[]`
-    - white list file paths that contains allow words array
+- `whitelistConfigPaths`: `string[]`
+    - File path list that includes allow words.
     - Support file format: JSON, yml, js
     
 For example, you can specify `allowPaths` to `.textlintrc`.
@@ -40,7 +40,7 @@ For example, you can specify `allowPaths` to `.textlintrc`.
 {
     "filters": {
         "whitelist": {
-            "allowPaths": [
+            "whitelistConfigPaths": [
                 "./allow.json",
                 "./allow.yml"
             ]

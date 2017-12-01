@@ -8,7 +8,7 @@ import reportRule from "textlint-rule-report-node-types";
 
 const assert = require("power-assert");
 describe("textlint-rule-filter-whitelist", function() {
-    context("when allowPaths", function() {
+    context("when whitelistConfigPaths", function() {
         it("should read json and use it as allow words", function() {
             const textlint = new TextLintCore();
             textlint.setupRules({
@@ -22,7 +22,7 @@ describe("textlint-rule-filter-whitelist", function() {
                 whitelist: filterRule
             }, {
                 whitelist: {
-                    allowPaths: [path.join(__dirname, "fixtures/allow.json")]
+                    whitelistConfigPaths: [path.join(__dirname, "fixtures/allow.json")]
                 }
             });
             return textlint.lintText("allow\n\nYES").then(({ messages }) => {
@@ -42,7 +42,7 @@ describe("textlint-rule-filter-whitelist", function() {
                 whitelist: filterRule
             }, {
                 whitelist: {
-                    allowPaths: [path.join(__dirname, "fixtures/allow.yml")]
+                    whitelistConfigPaths: [path.join(__dirname, "fixtures/allow.yml")]
                 }
             });
             return textlint.lintText("allow\n\nYES").then(({ messages }) => {
