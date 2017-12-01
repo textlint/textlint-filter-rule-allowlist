@@ -34,7 +34,7 @@ Via `.textlintrc`(Recommended)
     - white list file paths that contains allow words array
     - Support file format: JSON, yml, js
     
-For example, you can specify `allowPaths` to `.textlintrc`
+For example, you can specify `allowPaths` to `.textlintrc`.
 
 ```json
 {
@@ -48,6 +48,8 @@ For example, you can specify `allowPaths` to `.textlintrc`
     }
 }
 ```
+
+These files should be following formats.
 
 
 `allow.json`:
