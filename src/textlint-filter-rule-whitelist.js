@@ -11,7 +11,6 @@ const getAllowWordsFromFiles = (files, baseDirectory) => {
     files.forEach(filePath => {
         // TODO: use other loader
         const contents = rcfile("file", {
-            // This is not json
             configFileName: path.resolve(baseDirectory, filePath)
         });
         if (contents && Array.isArray(contents.config)) {
