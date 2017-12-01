@@ -15,7 +15,7 @@
     "src/",
     "lib/"
   ],
-  "version": "1.2.2",
+  "version": "1.2.3",
   "main": "lib/textlint-filter-rule-whitelist.js",
   "directories": {
     "test": "test"
