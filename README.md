@@ -34,7 +34,21 @@ Via `.textlintrc`(Recommended)
     - white list file paths that contains allow words array
     - Support file format: JSON, yml, js
     
-For example, you can specify `{ allowPaths: ["./allow.json"] }`.
+For example, you can specify `allowPaths` to `.textlintrc`
+
+```json
+{
+    "filters": {
+        "whitelist": {
+            "allowPaths": [
+                "./allow.json",
+                "./allow.yml"
+            ]
+        }
+    }
+}
+```
+
 
 `allow.json`:
 ```
@@ -43,8 +57,6 @@ For example, you can specify `{ allowPaths: ["./allow.json"] }`.
   "/yes/i"
 ]
 ```    
-
-For example, you can specify `{ allowPaths: ["./allow.yml"] }`.
 
 `allow.yml`:
 ```
