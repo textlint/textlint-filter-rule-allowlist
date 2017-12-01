@@ -24,7 +24,10 @@
     "test": "mocha test/",
     "build": "NODE_ENV=production babel src --out-dir lib --source-maps",
     "watch": "babel src --out-dir lib --watch --source-maps",
-    "prepublish": "npm run --if-present build"
+    "prepublish": "npm run --if-present build",
+    "prettier": "prettier --write '**/*.{js,jsx,ts,tsx,css}'",
+    "precommit": "lint-staged",
+    "postcommit": "git reset"
   },
   "keywords": [
     "textlint",
@@ -38,8 +41,11 @@
     "babel-preset-jsdoc-to-assert": "^4.0.0",
     "babel-preset-power-assert": "^1.0.0",
     "babel-register": "^6.11.6",
+    "husky": "^0.14.3",
+    "lint-staged": "^6.0.0",
     "mocha": "^4.0.1",
     "power-assert": "^1.4.1",
+    "prettier": "^1.8.2",
     "textlint": "^9.1.1",
     "textlint-rule-report-node-types": "^1.1.0",
     "textlint-tester": "^3.0.3"
@@ -54,5 +60,15 @@
   },
   "peerDependencies": {
     "textlint": ">= 9.0.0"
+  },
+  "prettier": {
+    "printWidth": 120,
+    "tabWidth": 4
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx,css}": [
+      "prettier --write",
+      "git add"
+    ]
   }
 }
