@@ -34,7 +34,7 @@ Via `.textlintrc`(Recommended)
     - File path list that includes allow words.
     - Support file format: JSON, yml, js
     
-For example, you can specify `allowPaths` to `.textlintrc`.
+For example, you can specify `whitelistConfigPaths` to `.textlintrc`.
 
 ```json
 {
