@@ -26,11 +26,33 @@ Via `.textlintrc`(Recommended)
 }
 ```
 
-## Options:
+## Options
 
 - `allow`: `string[]`
     - white list words or RegExp strings
+- `allowPaths`: `string[]`
+    - white list file paths that contains allow words array
+    - Support file format: JSON, yml, js
     
+For example, you can specify `{ allowPaths: ["./allow.json"] }`.
+
+`allow.json`:
+```
+[
+  "allow",
+  "/yes/i"
+]
+```    
+
+For example, you can specify `{ allowPaths: ["./allow.yml"] }`.
+
+`allow.yml`:
+```
+- "allow",
+- /yes/i
+```
+
+
 ### RegExp String
 
 textlint-filter-rule-whitelist allow to use RegExp like string.

@@ -1,5 +1,6 @@
 // LICENSE : MIT
 "use strict";
+const path = require("path");
 const TextLintCore = require("textlint").TextLintCore;
 const TextLintNodeType = require("textlint").TextLintNodeType;
 import filterRule from "../src/textlint-filter-rule-whitelist";
@@ -7,6 +8,48 @@ import reportRule from "textlint-rule-report-node-types";
 
 const assert = require("power-assert");
 describe("textlint-rule-filter-whitelist", function() {
+    context("when allowPaths", function() {
+        it("should read json and use it as allow words", function() {
+            const textlint = new TextLintCore();
+            textlint.setupRules({
+                report: reportRule
+            }, {
+                report: {
+                    nodeTypes: [TextLintNodeType.Str]
+                }
+            });
+            textlint.setupFilterRules({
+                whitelist: filterRule
+            }, {
+                whitelist: {
+                    allowPaths: [path.join(__dirname, "fixtures/allow.json")]
+                }
+            });
+            return textlint.lintText("allow\n\nYES").then(({ messages }) => {
+                assert.equal(messages.length, 0);
+            });
+        });
+        it("should read yml and use it as allow words", function() {
+            const textlint = new TextLintCore();
+            textlint.setupRules({
+                report: reportRule
+            }, {
+                report: {
+                    nodeTypes: [TextLintNodeType.Str]
+                }
+            });
+            textlint.setupFilterRules({
+                whitelist: filterRule
+            }, {
+                whitelist: {
+                    allowPaths: [path.join(__dirname, "fixtures/allow.yml")]
+                }
+            });
+            return textlint.lintText("allow\n\nYES").then(({ messages }) => {
+                assert.equal(messages.length, 0);
+            });
+        })
+    });
     context("when report and filter type", function() {
         it("should messages is empty", function() {
             const textlint = new TextLintCore();
