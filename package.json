@@ -45,6 +45,7 @@
     "textlint-tester": "^3.0.3"
   },
   "dependencies": {
+    "@textlint/ast-node-types": "^2.0.0",
     "escape-string-regexp": "^1.0.5",
     "execall": "^1.0.0",
     "rc-config-loader": "^2.0.1",

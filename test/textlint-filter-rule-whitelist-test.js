@@ -2,7 +2,7 @@
 "use strict";
 const path = require("path");
 const TextLintCore = require("textlint").TextLintCore;
-const TextLintNodeType = require("textlint").TextLintNodeType;
+const { ASTNodeTypes} = require("@textlint/ast-node-types");
 import filterRule from "../src/textlint-filter-rule-whitelist";
 import reportRule from "textlint-rule-report-node-types";
 
@@ -15,7 +15,7 @@ describe("textlint-rule-filter-whitelist", function() {
                 report: reportRule
             }, {
                 report: {
-                    nodeTypes: [TextLintNodeType.Str]
+                    nodeTypes: [ASTNodeTypes.Str]
                 }
             });
             textlint.setupFilterRules({
@@ -35,7 +35,7 @@ describe("textlint-rule-filter-whitelist", function() {
                 report: reportRule
             }, {
                 report: {
-                    nodeTypes: [TextLintNodeType.Str]
+                    nodeTypes: [ASTNodeTypes.Str]
                 }
             });
             textlint.setupFilterRules({
@@ -55,7 +55,7 @@ describe("textlint-rule-filter-whitelist", function() {
                 report: reportRule
             }, {
                 report: {
-                    nodeTypes: [TextLintNodeType.Str]
+                    nodeTypes: [ASTNodeTypes.Str]
                 }
             });
             textlint.setupFilterRules({
@@ -78,7 +78,7 @@ describe("textlint-rule-filter-whitelist", function() {
                 report: reportRule
             }, {
                 report: {
-                    nodeTypes: [TextLintNodeType.Str]
+                    nodeTypes: [ASTNodeTypes.Str]
                 }
             });
             textlint.setupFilterRules({
@@ -99,7 +99,7 @@ describe("textlint-rule-filter-whitelist", function() {
                 report: reportRule
             }, {
                 report: {
-                    nodeTypes: [TextLintNodeType.Code]
+                    nodeTypes: [ASTNodeTypes.Code]
                 }
             });
             textlint.setupFilterRules({
@@ -120,7 +120,7 @@ describe("textlint-rule-filter-whitelist", function() {
                 report: reportRule
             }, {
                 report: {
-                    nodeTypes: [TextLintNodeType.Code]
+                    nodeTypes: [ASTNodeTypes.Code]
                 }
             });
             textlint.setupFilterRules({
@@ -141,7 +141,7 @@ describe("textlint-rule-filter-whitelist", function() {
                 report: reportRule
             }, {
                 report: {
-                    nodeTypes: [TextLintNodeType.Paragraph]
+                    nodeTypes: [ASTNodeTypes.Paragraph]
                 }
             });
             textlint.setupFilterRules({
@@ -168,7 +168,7 @@ describe("textlint-rule-filter-whitelist", function() {
                 report: reportRule
             }, {
                 report: {
-                    nodeTypes: [TextLintNodeType.Str]
+                    nodeTypes: [ASTNodeTypes.Str]
                 }
             });
             textlint.setupFilterRules({
