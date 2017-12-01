@@ -48,7 +48,28 @@ describe("textlint-rule-filter-whitelist", function() {
             return textlint.lintText("allow\n\nYES").then(({ messages }) => {
                 assert.equal(messages.length, 0);
             });
-        })
+        });
+        it("should read json and use it as allow words", function() {
+            const textlint = new TextLintCore();
+            textlint.setupRules({
+                report: reportRule
+            }, {
+                report: {
+                    nodeTypes: [TextLintNodeType.Str]
+                }
+            });
+            textlint.setupFilterRules({
+                whitelist: filterRule
+            }, {
+                whitelist: {
+                    allow: ["NO"],
+                    whitelistConfigPaths: [path.join(__dirname, "fixtures/allow.json")]
+                }
+            });
+            return textlint.lintText("allow\n\nYES\n\nNO").then(({ messages }) => {
+                assert.equal(messages.length, 0);
+            });
+        });
     });
     context("when report and filter type", function() {
         it("should messages is empty", function() {
