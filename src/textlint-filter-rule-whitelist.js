@@ -5,7 +5,7 @@ const execall = require('execall');
 const escapeStringRegexp = require('escape-string-regexp');
 const toRegExp = require("str-to-regexp").toRegExp;
 const rcfile = require("rc-config-loader");
-
+const { getConfigBaseDir} = require("@textlint/get-config-base-dir");
 const getAllowWordsFromFiles = (files, baseDirectory) => {
     let results = [];
     files.forEach(filePath => {
@@ -42,7 +42,7 @@ const defaultOptions = {
 };
 module.exports = function(context, options) {
     const { Syntax, shouldIgnore, getSource } = context;
-    const baseDirectory = context.getConfigBaseDir();
+    const baseDirectory = getConfigBaseDir(context);
     const allowWords = options.allow || defaultOptions.allow;
     const whitelistConfigPaths = options.whitelistConfigPaths
         ? getAllowWordsFromFiles(options.whitelistConfigPaths, baseDirectory)
