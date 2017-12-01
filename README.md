@@ -1,6 +1,6 @@
 # textlint-filter-rule-whitelist
 
-textlint [filter rule](https://github.com/textlint/textlint/blob/master/docs/filter-rule.md "Filter rule") that filter any word by white list.
+[textlint](https://github.com/textlint) [filter rule](https://github.com/textlint/textlint/blob/master/docs/filter-rule.md "Filter rule") that filter any word by white list.
 
 ## Install
 
@@ -26,11 +26,47 @@ Via `.textlintrc`(Recommended)
 }
 ```
 
-## Options:
+## Options
 
 - `allow`: `string[]`
     - white list words or RegExp strings
+- `whitelistConfigPaths`: `string[]`
+    - File path list that includes allow words.
+    - Support file format: JSON, yml, js
     
+For example, you can specify `whitelistConfigPaths` to `.textlintrc`.
+
+```json
+{
+    "filters": {
+        "whitelist": {
+            "whitelistConfigPaths": [
+                "./allow.json",
+                "./allow.yml"
+            ]
+        }
+    }
+}
+```
+
+These files should be following formats.
+
+
+`allow.json`:
+```
+[
+  "allow",
+  "/yes/i"
+]
+```    
+
+`allow.yml`:
+```
+- "allow",
+- /yes/i
+```
+
+
 ### RegExp String
 
 textlint-filter-rule-whitelist allow to use RegExp like string.

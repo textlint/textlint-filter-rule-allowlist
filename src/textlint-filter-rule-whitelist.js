@@ -1,22 +1,54 @@
 // LICENSE : MIT
 "use strict";
+const path = require('path');
 const execall = require('execall');
 const escapeStringRegexp = require('escape-string-regexp');
 const toRegExp = require("str-to-regexp").toRegExp;
+const rcfile = require("rc-config-loader");
+
+const getAllowWordsFromFiles = (files, baseDirectory) => {
+    let results = [];
+    files.forEach(filePath => {
+        // TODO: use other loader
+        const contents = rcfile("file", {
+            configFileName: path.resolve(baseDirectory, filePath)
+        });
+        if (contents && Array.isArray(contents.config)) {
+            results = results.concat(contents.config);
+        } else {
+            throw new Error(`This allow file is not allow word list: ${filePath}`);
+        }
+    });
+    return results;
+};
+
 const COMPLEX_REGEX_END = /^.+\/(\w*)$/;
 const defaultOptions = {
-    // white list
-    // string or RegExp string
-    // e.g.
-    // "string"
-    // "/\\d+/"
-    // "/^===/m"
-    allow: []
+    /**
+     * White list strings or RegExp strings
+     * For example, you can specify following.
+     *
+     * [
+     *     "string",
+     *     "/\\d+/",
+     *     "/^===/m",
+     * ]
+     */
+    allow: [],
+    /**
+     * file path list that includes allow words.
+     */
+    whitelistConfigPaths: []
 };
 module.exports = function(context, options) {
     const { Syntax, shouldIgnore, getSource } = context;
+    const baseDirectory = context.getConfigBaseDir();
     const allowWords = options.allow || defaultOptions.allow;
-    const regExpWhiteList = allowWords.map(allowWord => {
+    const whitelistConfigPaths = options.whitelistConfigPaths
+        ? getAllowWordsFromFiles(options.whitelistConfigPaths, baseDirectory)
+        : [];
+    const allAllowWords = allowWords.concat(whitelistConfigPaths);
+    const regExpWhiteList = allAllowWords.map(allowWord => {
         if (!allowWord) {
             return /^$/;
         }
