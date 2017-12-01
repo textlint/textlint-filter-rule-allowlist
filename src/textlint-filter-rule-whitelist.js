@@ -42,7 +42,7 @@ const defaultOptions = {
 };
 module.exports = function(context, options) {
     const { Syntax, shouldIgnore, getSource } = context;
-    const baseDirectory = getConfigBaseDir(context);
+    const baseDirectory = getConfigBaseDir(context) || process.cwd();
     const allowWords = options.allow || defaultOptions.allow;
     const whitelistConfigPaths = options.whitelistConfigPaths
         ? getAllowWordsFromFiles(options.whitelistConfigPaths, baseDirectory)

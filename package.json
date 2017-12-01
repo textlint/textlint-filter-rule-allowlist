@@ -46,7 +46,7 @@
   },
   "dependencies": {
     "@textlint/ast-node-types": "^2.0.0",
-    "@textlint/get-config-base-dir": "^1.0.1",
+    "@textlint/get-config-base-dir": "^2.0.0",
     "escape-string-regexp": "^1.0.5",
     "execall": "^1.0.0",
     "rc-config-loader": "^2.0.1",
