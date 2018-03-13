@@ -32,6 +32,7 @@ Via `.textlintrc`(Recommended)
     - white list words or RegExp strings
 - `whitelistConfigPaths`: `string[]`
     - File path list that includes allow words.
+    - The File path is relative path from your `.textlintrc`.
     - Support file format: JSON, yml, js
     
 For example, you can specify `whitelistConfigPaths` to `.textlintrc`.
