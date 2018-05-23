@@ -1,11 +1,9 @@
 // LICENSE : MIT
 "use strict";
 const path = require("path");
-const execall = require("execall");
-const escapeStringRegexp = require("escape-string-regexp");
-const toRegExp = require("str-to-regexp").toRegExp;
 const rcfile = require("rc-config-loader");
 const { getConfigBaseDir } = require("@textlint/get-config-base-dir");
+const { matchPatterns } = require("@textlint/regexp-string-matcher");
 const getAllowWordsFromFiles = (files, baseDirectory) => {
     let results = [];
     files.forEach(filePath => {
@@ -22,7 +20,6 @@ const getAllowWordsFromFiles = (files, baseDirectory) => {
     return results;
 };
 
-const COMPLEX_REGEX_END = /^.+\/(\w*)$/;
 const defaultOptions = {
     /**
      * White list strings or RegExp strings
@@ -48,25 +45,12 @@ module.exports = function(context, options) {
         ? getAllowWordsFromFiles(options.whitelistConfigPaths, baseDirectory)
         : [];
     const allAllowWords = allowWords.concat(whitelistConfigPaths);
-    const regExpWhiteList = allAllowWords.map(allowWord => {
-        if (!allowWord) {
-            return /^$/;
-        }
-        if (allowWord[0] === "/" && COMPLEX_REGEX_END.test(allowWord)) {
-            return toRegExp(allowWord);
-        }
-        const escapeString = escapeStringRegexp(allowWord);
-        return new RegExp(escapeString, "g");
-    });
     return {
         [Syntax.Document](node) {
             const text = getSource(node);
-            regExpWhiteList.forEach(whiteRegExp => {
-                const matches = execall(whiteRegExp, text);
-                matches.forEach(match => {
-                    const lastIndex = match.index + match.match.length;
-                    shouldIgnore([match.index, lastIndex]);
-                });
+            const matchResults = matchPatterns(text, allAllowWords);
+            matchResults.forEach(result => {
+                shouldIgnore([result.startIndex, result.endIndex]);
             });
         }
     };
