@@ -18,6 +18,7 @@ Via `.textlintrc`(Recommended)
         "whitelist": {
             "allow": [
                 "ignored-word",
+                "/\\d{4}-\\d{2}-\\d{2}/",
                 "/===IGNORE===[\\s\\S]*?===\/IGNORE===/m"
             ]
         }

@@ -22,8 +22,7 @@ const getAllowWordsFromFiles = (files, baseDirectory) => {
 
 const defaultOptions = {
     /**
-     * White list strings or RegExp strings
-     * For example, you can specify following.
+     * White list strings or RegExp-like strings
      *
      * [
      *     "string",
