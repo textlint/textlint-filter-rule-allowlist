@@ -18,8 +18,7 @@ Via `.textlintrc`(Recommended)
         "whitelist": {
             "allow": [
                 "ignored-word",
-                "/\\d+/",
-                "/^===/m"
+                "/===IGNORE===[\\s\\S]*?===\/IGNORE===/m"
             ]
         }
     }
@@ -29,12 +28,12 @@ Via `.textlintrc`(Recommended)
 ## Options
 
 - `allow`: `string[]`
-    - white list words or RegExp strings
+    - white list String or [RegExp-like String](https://github.com/textlint/regexp-string-matcher#regexp-like-string)
 - `whitelistConfigPaths`: `string[]`
     - File path list that includes allow words.
     - The File path is relative path from your `.textlintrc`.
     - Support file format: JSON, yml, js
-    
+
 For example, you can specify `whitelistConfigPaths` to `.textlintrc`.
 
 ```json
@@ -52,34 +51,74 @@ For example, you can specify `whitelistConfigPaths` to `.textlintrc`.
 
 These files should be following formats.
 
-
 `allow.json`:
 ```
 [
-  "allow",
+  "ignore-word",
   "/yes/i"
 ]
-```    
+```
 
 `allow.yml`:
 ```
-- "allow",
+- "ignore-word",
 - /yes/i
 ```
 
 
-### RegExp String
+## RegExp-like String
 
-textlint-filter-rule-whitelist allow to use RegExp like string.
-The string is stated with `/` and ended with `/` or `/flag`.
+This filter rule support [RegExp-like String](https://github.com/textlint/regexp-string-matcher#regexp-like-string).
+RegExp-like String is that started with `/` and ended with `/` or `/flag`.
+
+:warning: Yous should escape special characters like `\d` in string literal.
+`/\d/` should be `"\\d"`.
+
+For example, you want to ignore `/\d{4}-\d{2}-\d{2}/` pattern, you can write `allow` as follows:
 
 ```js
-"/\\d+/"; // => /\d+/
+[
+  "/\\d{4}-\\d{2}-\\d{2}/"
+]
 ```
 
-**Note**:
+### Example: Ignore pattern
 
-Multiline pattern should be use `m` flag like `/regexp/m`.
+Some textlint rule has false-positive about unique noun.
+You want to ignore the error about unique noun.
+
+For example, you want to ignore error about `/github/i`, you can write `allow` as follows:
+
+`allow.json`:
+```
+[
+  "/github/i`
+]
+```
+
+### Example: Ignore range
+
+You want to ignore error between `===IGNORE===` mark.
+
+`allow.json`:
+```
+[
+  "/===IGNORE===[\\s\\S]*?===/IGNORE===/m`
+]
+```
+
+**text:**
+```
+ERROR Text => actual error
+
+===IGNORE===
+ERROR Text => it is ignored!
+===/IGNORE===
+
+ERROR Text => actual error
+```
+
+For more information, see [textlint/regexp-string-matcher – Example](https://github.com/textlint/regexp-string-matcher#examples)
 
 ## Changelog
 

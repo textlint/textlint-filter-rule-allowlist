@@ -204,6 +204,38 @@ describe("textlint-rule-filter-whitelist", function() {
                     });
                 });
         });
+        it("should support multiline", function() {
+            const textlint = new TextLintCore();
+            textlint.setupRules(
+                {
+                    report: reportRule
+                },
+                {
+                    report: {
+                        nodeTypes: [ASTNodeTypes.Paragraph]
+                    }
+                }
+            );
+            textlint.setupFilterRules(
+                {
+                    whitelist: filterRule
+                },
+                {
+                    whitelist: {
+                        allow: ["/===IGNORE===[\\s\\S]*?===/IGNORE===/m"]
+                    }
+                }
+            );
+            return textlint
+                .lintMarkdown(
+                    `===IGNORE===
+ERROR Text, But this range should be ignored!
+===/IGNORE===`
+                )
+                .then(({ messages }) => {
+                    assert.equal(messages.length, 0);
+                });
+        });
         it("should messages is ignore by RegExp", function() {
             const textlint = new TextLintCore();
             textlint.setupRules(
@@ -229,6 +261,40 @@ describe("textlint-rule-filter-whitelist", function() {
             return textlint.lintMarkdown("{{book.console}}").then(({ messages }) => {
                 assert.equal(messages.length, 0);
             });
+        });
+
+        it("should messages is ignore by RegExp", function() {
+            const textlint = new TextLintCore();
+            textlint.setupRules(
+                {
+                    report: reportRule
+                },
+                {
+                    report: {
+                        nodeTypes: [ASTNodeTypes.Str]
+                    }
+                }
+            );
+            textlint.setupFilterRules(
+                {
+                    whitelist: filterRule
+                },
+                {
+                    whitelist: {
+                        allow: ["/#.*{#[a-z.-]+}/g"]
+                    }
+                }
+            );
+            return textlint
+                .lintMarkdown(
+                    `# JavaScriptとは {#what-is-javascript}
+            
+# JavaScriptってどのような言語？ {#about-javascript}
+`
+                )
+                .then(({ messages }) => {
+                    assert.equal(messages.length, 0);
+                });
         });
     });
 });
