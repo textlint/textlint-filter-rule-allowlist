@@ -77,13 +77,13 @@ RegExp-like String is that started with `/` and ended with `/` or `/flag`.
 
 For example, you want to ignore `/\d{4}-\d{2}-\d{2}/` pattern, you can write `allow` as follows:
 
-```js
+```json
 [
   "/\\d{4}-\\d{2}-\\d{2}/"
 ]
 ```
 
-### Example: Ignore pattern
+### Example: Ignore text by RegExp-like string
 
 Some textlint rule has false-positive about unique noun.
 You want to ignore the error about unique noun.
@@ -96,6 +96,9 @@ For example, you want to ignore error about `/github/i`, you can write `allow` a
   "/github/i`
 ]
 ```
+
+This rule treat RegExp-like string as `/github/ig.`.
+`g`(global) flag is added by default.
 
 ### Example: Ignore range
 
