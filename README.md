@@ -119,6 +119,28 @@ ERROR Text => it is ignored!
 ERROR Text => actual error
 ```
 
+### Example: Ignore Math extension
+
+You want to ignore math expression(`$$ math expression $$`) in Markdown.
+
+`allow.json`:
+```json
+[
+  "/\\$\\$[\\s\\S]*?\\$\\$/m"
+]
+```
+
+**text:**
+```
+$$
+\begin{pmatrix}
+1 & 0 & 0 \\\ 
+0 & 1 & 0 \\\
+0 & 0 & 1
+\end{pmatrix}
+$$
+```
+
 For more information, see [textlint/regexp-string-matcher – Example](https://github.com/textlint/regexp-string-matcher#examples)
 
 ## Changelog

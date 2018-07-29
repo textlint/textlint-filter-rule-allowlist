@@ -236,6 +236,42 @@ ERROR Text, But this range should be ignored!
                     assert.equal(messages.length, 0);
                 });
         });
+        it("should support Math extension", function() {
+            const textlint = new TextLintCore();
+            textlint.setupRules(
+                {
+                    report: reportRule
+                },
+                {
+                    report: {
+                        nodeTypes: [ASTNodeTypes.Paragraph]
+                    }
+                }
+            );
+            textlint.setupFilterRules(
+                {
+                    whitelist: filterRule
+                },
+                {
+                    whitelist: {
+                        allow: ["/\\$\\$[\\s\\S]*?\\$\\$/m"]
+                    }
+                }
+            );
+            return textlint
+                .lintMarkdown(
+                    `$$
+\\begin{pmatrix}
+1 & 0 & 0 \\\\\\ 
+0 & 1 & 0 \\\\\\
+0 & 0 & 1
+\\end{pmatrix}
+$$`
+                )
+                .then(({ messages }) => {
+                    assert.equal(messages.length, 0);
+                });
+        });
         it("should messages is ignore by RegExp", function() {
             const textlint = new TextLintCore();
             textlint.setupRules(
