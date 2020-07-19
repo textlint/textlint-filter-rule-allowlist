@@ -150,6 +150,15 @@ For more information, see [textlint/regexp-string-matcher – Example](https://g
 
 See [Releases page](https://github.com/textlint/textlint-filter-rule-allowlist/releases).
 
+### Rename: `textlint-filter-rule-whitelist` to `textlint-filter-rule-allowlist`
+
+The original name of this filter rule is `textlint-filter-rule-whitelist`.
+We have migrated to use `textlint-filter-rule-allowlist`.
+
+For more details, see following issue.
+
+- [Rename whitelist to allowlist](https://github.com/textlint/textlint-filter-rule-allowlist/pull/9)
+
 ## Running tests
 
 Install devDependencies and Run `npm test`:
