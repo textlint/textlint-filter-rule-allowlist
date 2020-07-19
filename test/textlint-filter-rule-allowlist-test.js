@@ -1,14 +1,14 @@
 // LICENSE : MIT
 "use strict";
 import { ASTNodeTypes } from "@textlint/ast-node-types";
-import filterRule from "../src/textlint-filter-rule-whitelist";
+import filterRule from "../src/textlint-filter-rule-allowlist";
 import reportRule from "textlint-rule-report-node-types";
 import path from "path";
 import assert from "assert";
 import { TextLintCore } from "textlint";
 
-describe("textlint-rule-filter-whitelist", function () {
-    context("when whitelistConfigPaths", function () {
+describe("textlint-rule-filter-allowlist", function () {
+    context("when allowlistConfigPaths", function () {
         it("should read json and use it as allow words", function () {
             const textlint = new TextLintCore();
             textlint.setupRules(
@@ -23,11 +23,11 @@ describe("textlint-rule-filter-whitelist", function () {
             );
             textlint.setupFilterRules(
                 {
-                    whitelist: filterRule,
+                    allowlist: filterRule,
                 },
                 {
-                    whitelist: {
-                        whitelistConfigPaths: [path.join(__dirname, "fixtures/allow.json")],
+                    allowlist: {
+                        allowlistConfigPaths: [path.join(__dirname, "fixtures/allow.json")],
                     },
                 }
             );
@@ -49,11 +49,11 @@ describe("textlint-rule-filter-whitelist", function () {
             );
             textlint.setupFilterRules(
                 {
-                    whitelist: filterRule,
+                    allowlist: filterRule,
                 },
                 {
-                    whitelist: {
-                        whitelistConfigPaths: [path.join(__dirname, "fixtures/allow.yml")],
+                    allowlist: {
+                        allowlistConfigPaths: [path.join(__dirname, "fixtures/allow.yml")],
                     },
                 }
             );
@@ -75,12 +75,12 @@ describe("textlint-rule-filter-whitelist", function () {
             );
             textlint.setupFilterRules(
                 {
-                    whitelist: filterRule,
+                    allowlist: filterRule,
                 },
                 {
-                    whitelist: {
+                    allowlist: {
                         allow: ["NO"],
-                        whitelistConfigPaths: [path.join(__dirname, "fixtures/allow.json")],
+                        allowlistConfigPaths: [path.join(__dirname, "fixtures/allow.json")],
                     },
                 }
             );
@@ -104,10 +104,10 @@ describe("textlint-rule-filter-whitelist", function () {
             );
             textlint.setupFilterRules(
                 {
-                    whitelist: filterRule,
+                    allowlist: filterRule,
                 },
                 {
-                    whitelist: {
+                    allowlist: {
                         allow: ["text"],
                     },
                 }
@@ -131,10 +131,10 @@ describe("textlint-rule-filter-whitelist", function () {
             );
             textlint.setupFilterRules(
                 {
-                    whitelist: filterRule,
+                    allowlist: filterRule,
                 },
                 {
-                    whitelist: {
+                    allowlist: {
                         // not regExp
                         allow: ["`\\d+`"],
                     },
@@ -158,10 +158,10 @@ describe("textlint-rule-filter-whitelist", function () {
             );
             textlint.setupFilterRules(
                 {
-                    whitelist: filterRule,
+                    allowlist: filterRule,
                 },
                 {
-                    whitelist: {
+                    allowlist: {
                         allow: ["/`\\d+`/"],
                     },
                 }
@@ -185,10 +185,10 @@ describe("textlint-rule-filter-whitelist", function () {
             );
             textlint.setupFilterRules(
                 {
-                    whitelist: filterRule,
+                    allowlist: filterRule,
                 },
                 {
-                    whitelist: {
+                    allowlist: {
                         allow: ["/^={1,4}\\s/m", "This is not error."],
                     },
                 }
@@ -218,10 +218,10 @@ describe("textlint-rule-filter-whitelist", function () {
             );
             textlint.setupFilterRules(
                 {
-                    whitelist: filterRule,
+                    allowlist: filterRule,
                 },
                 {
-                    whitelist: {
+                    allowlist: {
                         allow: ["/===IGNORE===[\\s\\S]*?===/IGNORE===/m"],
                     },
                 }
@@ -250,10 +250,10 @@ ERROR Text, But this range should be ignored!
             );
             textlint.setupFilterRules(
                 {
-                    whitelist: filterRule,
+                    allowlist: filterRule,
                 },
                 {
-                    whitelist: {
+                    allowlist: {
                         allow: ["/\\$\\$[\\s\\S]*?\\$\\$/m"],
                     },
                 }
@@ -286,10 +286,10 @@ $$`
             );
             textlint.setupFilterRules(
                 {
-                    whitelist: filterRule,
+                    allowlist: filterRule,
                 },
                 {
-                    whitelist: {
+                    allowlist: {
                         allow: ["/{{.*?}}/"],
                     },
                 }
@@ -313,10 +313,10 @@ $$`
             );
             textlint.setupFilterRules(
                 {
-                    whitelist: filterRule,
+                    allowlist: filterRule,
                 },
                 {
-                    whitelist: {
+                    allowlist: {
                         allow: ["/#.*{#[a-z.-]+}/g"],
                     },
                 }
