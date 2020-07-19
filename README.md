@@ -1,6 +1,6 @@
 # textlint-filter-rule-whitelist
 
-[textlint](https://github.com/textlint) [filter rule](https://github.com/textlint/textlint/blob/master/docs/filter-rule.md "Filter rule") that filter any word by white list.
+[textlint](https://github.com/textlint) [filter rule](https://github.com/textlint/textlint/blob/master/docs/filter-rule.md "Filter rule") that filters any word by allowing lists.
 
 ## Install
 

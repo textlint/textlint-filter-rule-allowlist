@@ -1,15 +1,15 @@
 // LICENSE : MIT
 "use strict";
 const path = require("path");
-const rcfile = require("rc-config-loader");
+const { rcFile } = require("rc-config-loader");
 const { getConfigBaseDir } = require("@textlint/get-config-base-dir");
 const { matchPatterns } = require("@textlint/regexp-string-matcher");
 const getAllowWordsFromFiles = (files, baseDirectory) => {
     let results = [];
-    files.forEach(filePath => {
+    files.forEach((filePath) => {
         // TODO: use other loader
-        const contents = rcfile("file", {
-            configFileName: path.resolve(baseDirectory, filePath)
+        const contents = rcFile("file", {
+            configFileName: path.resolve(baseDirectory, filePath),
         });
         if (contents && Array.isArray(contents.config)) {
             results = results.concat(contents.config);
@@ -34,9 +34,9 @@ const defaultOptions = {
     /**
      * file path list that includes allow words.
      */
-    whitelistConfigPaths: []
+    whitelistConfigPaths: [],
 };
-module.exports = function(context, options) {
+module.exports = function (context, options) {
     const { Syntax, shouldIgnore, getSource } = context;
     const baseDirectory = getConfigBaseDir(context) || process.cwd();
     const allowWords = options.allow || defaultOptions.allow;
@@ -48,9 +48,9 @@ module.exports = function(context, options) {
         [Syntax.Document](node) {
             const text = getSource(node);
             const matchResults = matchPatterns(text, allAllowWords);
-            matchResults.forEach(result => {
+            matchResults.forEach((result) => {
                 shouldIgnore([result.startIndex, result.endIndex]);
             });
-        }
+        },
     };
 };
