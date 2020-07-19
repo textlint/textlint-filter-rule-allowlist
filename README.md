@@ -1,12 +1,12 @@
-# textlint-filter-rule-whitelist
+# textlint-filter-rule-allowlist
 
-[textlint](https://github.com/textlint) [filter rule](https://github.com/textlint/textlint/blob/master/docs/filter-rule.md "Filter rule") that filter any word by white list.
+[textlint](https://github.com/textlint) [filter rule](https://github.com/textlint/textlint/blob/master/docs/filter-rule.md "Filter rule") that filters any word by allowing lists.
 
 ## Install
 
 Install with [npm](https://www.npmjs.com/):
 
-    npm install textlint-filter-rule-whitelist
+    npm install textlint-filter-rule-allowlist
 
 ## Usage
 
@@ -15,7 +15,7 @@ Via `.textlintrc`(Recommended)
 ```json
 {
     "filters": {
-        "whitelist": {
+        "allowlist": {
             "allow": [
                 "ignored-word",
                 "/\\d{4}-\\d{2}-\\d{2}/",
@@ -29,19 +29,19 @@ Via `.textlintrc`(Recommended)
 ## Options
 
 - `allow`: `string[]`
-    - white list String or [RegExp-like String](https://github.com/textlint/regexp-string-matcher#regexp-like-string)
-- `whitelistConfigPaths`: `string[]`
+    - allowing list String or [RegExp-like String](https://github.com/textlint/regexp-string-matcher#regexp-like-string)
+- `allowlistConfigPaths`: `string[]`
     - File path list that includes allow words.
     - The File path is relative path from your `.textlintrc`.
     - Support file format: JSON, yml, js
 
-For example, you can specify `whitelistConfigPaths` to `.textlintrc`.
+For example, you can specify `allowlistConfigPaths` to `.textlintrc`.
 
 ```json
 {
     "filters": {
-        "whitelist": {
-            "whitelistConfigPaths": [
+        "allowlist": {
+            "allowlistConfigPaths": [
                 "./allow.json",
                 "./allow.yml"
             ]
@@ -148,7 +148,16 @@ For more information, see [textlint/regexp-string-matcher – Example](https://g
 
 ## Changelog
 
-See [Releases page](https://github.com/textlint/textlint-filter-rule-whitelist/releases).
+See [Releases page](https://github.com/textlint/textlint-filter-rule-allowlist/releases).
+
+### Rename: `textlint-filter-rule-whitelist` to `textlint-filter-rule-allowlist`
+
+The original name of this filter rule is `textlint-filter-rule-whitelist`.
+We have migrated to use `textlint-filter-rule-allowlist`.
+
+For more details, see following issue.
+
+- [Rename whitelist to allowlist](https://github.com/textlint/textlint-filter-rule-allowlist/pull/9)
 
 ## Running tests
 
@@ -160,7 +169,7 @@ Install devDependencies and Run `npm test`:
 
 Pull requests and stars are always welcome.
 
-For bugs and feature requests, [please create an issue](https://github.com/textlint/textlint-filter-rule-whitelist/issues).
+For bugs and feature requests, [please create an issue](https://github.com/textlint/textlint-filter-rule-allowlist/issues).
 
 1. Fork it!
 2. Create your feature branch: `git checkout -b my-new-feature`

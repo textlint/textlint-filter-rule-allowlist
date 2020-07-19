@@ -1,14 +1,12 @@
-// LICENSE : MIT
-"use strict";
 const path = require("path");
-const rcfile = require("rc-config-loader");
+const { rcFile } = require("rc-config-loader");
 const { getConfigBaseDir } = require("@textlint/get-config-base-dir");
 const { matchPatterns } = require("@textlint/regexp-string-matcher");
 const getAllowWordsFromFiles = (files, baseDirectory) => {
     let results = [];
-    files.forEach(filePath => {
+    files.forEach((filePath) => {
         // TODO: use other loader
-        const contents = rcfile("file", {
+        const contents = rcFile("file", {
             configFileName: path.resolve(baseDirectory, filePath)
         });
         if (contents && Array.isArray(contents.config)) {
@@ -22,7 +20,7 @@ const getAllowWordsFromFiles = (files, baseDirectory) => {
 
 const defaultOptions = {
     /**
-     * White list strings or RegExp-like strings
+     * allowing list strings or RegExp-like strings
      *
      * [
      *     "string",
@@ -34,21 +32,21 @@ const defaultOptions = {
     /**
      * file path list that includes allow words.
      */
-    whitelistConfigPaths: []
+    allowlistConfigPaths: []
 };
 module.exports = function(context, options) {
     const { Syntax, shouldIgnore, getSource } = context;
     const baseDirectory = getConfigBaseDir(context) || process.cwd();
     const allowWords = options.allow || defaultOptions.allow;
-    const whitelistConfigPaths = options.whitelistConfigPaths
-        ? getAllowWordsFromFiles(options.whitelistConfigPaths, baseDirectory)
+    const allowlistConfigPaths = options.allowlistConfigPaths
+        ? getAllowWordsFromFiles(options.allowlistConfigPaths, baseDirectory)
         : [];
-    const allAllowWords = allowWords.concat(whitelistConfigPaths);
+    const allAllowWords = allowWords.concat(allowlistConfigPaths);
     return {
         [Syntax.Document](node) {
             const text = getSource(node);
             const matchResults = matchPatterns(text, allAllowWords);
-            matchResults.forEach(result => {
+            matchResults.forEach((result) => {
                 shouldIgnore([result.startIndex, result.endIndex]);
             });
         }

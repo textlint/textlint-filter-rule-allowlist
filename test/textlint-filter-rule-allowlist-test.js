@@ -1,87 +1,87 @@
 // LICENSE : MIT
 "use strict";
-const path = require("path");
-const TextLintCore = require("textlint").TextLintCore;
-const { ASTNodeTypes } = require("@textlint/ast-node-types");
-import filterRule from "../src/textlint-filter-rule-whitelist";
+import { ASTNodeTypes } from "@textlint/ast-node-types";
+import filterRule from "../src/textlint-filter-rule-allowlist";
 import reportRule from "textlint-rule-report-node-types";
+import path from "path";
+import assert from "assert";
+import { TextLintCore } from "textlint";
 
-const assert = require("power-assert");
-describe("textlint-rule-filter-whitelist", function() {
-    context("when whitelistConfigPaths", function() {
-        it("should read json and use it as allow words", function() {
+describe("textlint-rule-filter-allowlist", function () {
+    context("when allowlistConfigPaths", function () {
+        it("should read json and use it as allow words", function () {
             const textlint = new TextLintCore();
             textlint.setupRules(
                 {
-                    report: reportRule
+                    report: reportRule,
                 },
                 {
                     report: {
-                        nodeTypes: [ASTNodeTypes.Str]
-                    }
+                        nodeTypes: [ASTNodeTypes.Str],
+                    },
                 }
             );
             textlint.setupFilterRules(
                 {
-                    whitelist: filterRule
+                    allowlist: filterRule,
                 },
                 {
-                    whitelist: {
-                        whitelistConfigPaths: [path.join(__dirname, "fixtures/allow.json")]
-                    }
+                    allowlist: {
+                        allowlistConfigPaths: [path.join(__dirname, "fixtures/allow.json")],
+                    },
                 }
             );
             return textlint.lintText("allow\n\nYES").then(({ messages }) => {
                 assert.equal(messages.length, 0);
             });
         });
-        it("should read yml and use it as allow words", function() {
+        it("should read yml and use it as allow words", function () {
             const textlint = new TextLintCore();
             textlint.setupRules(
                 {
-                    report: reportRule
+                    report: reportRule,
                 },
                 {
                     report: {
-                        nodeTypes: [ASTNodeTypes.Str]
-                    }
+                        nodeTypes: [ASTNodeTypes.Str],
+                    },
                 }
             );
             textlint.setupFilterRules(
                 {
-                    whitelist: filterRule
+                    allowlist: filterRule,
                 },
                 {
-                    whitelist: {
-                        whitelistConfigPaths: [path.join(__dirname, "fixtures/allow.yml")]
-                    }
+                    allowlist: {
+                        allowlistConfigPaths: [path.join(__dirname, "fixtures/allow.yml")],
+                    },
                 }
             );
             return textlint.lintText("allow\n\nYES").then(({ messages }) => {
                 assert.equal(messages.length, 0);
             });
         });
-        it("should read json and use it as allow words", function() {
+        it("should read json and use it as allow words", function () {
             const textlint = new TextLintCore();
             textlint.setupRules(
                 {
-                    report: reportRule
+                    report: reportRule,
                 },
                 {
                     report: {
-                        nodeTypes: [ASTNodeTypes.Str]
-                    }
+                        nodeTypes: [ASTNodeTypes.Str],
+                    },
                 }
             );
             textlint.setupFilterRules(
                 {
-                    whitelist: filterRule
+                    allowlist: filterRule,
                 },
                 {
-                    whitelist: {
+                    allowlist: {
                         allow: ["NO"],
-                        whitelistConfigPaths: [path.join(__dirname, "fixtures/allow.json")]
-                    }
+                        allowlistConfigPaths: [path.join(__dirname, "fixtures/allow.json")],
+                    },
                 }
             );
             return textlint.lintText("allow\n\nYES\n\nNO").then(({ messages }) => {
@@ -89,27 +89,27 @@ describe("textlint-rule-filter-whitelist", function() {
             });
         });
     });
-    context("when report and filter type", function() {
-        it("should messages is empty", function() {
+    context("when report and filter type", function () {
+        it("should messages is empty", function () {
             const textlint = new TextLintCore();
             textlint.setupRules(
                 {
-                    report: reportRule
+                    report: reportRule,
                 },
                 {
                     report: {
-                        nodeTypes: [ASTNodeTypes.Str]
-                    }
+                        nodeTypes: [ASTNodeTypes.Str],
+                    },
                 }
             );
             textlint.setupFilterRules(
                 {
-                    whitelist: filterRule
+                    allowlist: filterRule,
                 },
                 {
-                    whitelist: {
-                        allow: ["text"]
-                    }
+                    allowlist: {
+                        allow: ["text"],
+                    },
                 }
             );
             return textlint.lintText("text").then(({ messages }) => {
@@ -117,53 +117,53 @@ describe("textlint-rule-filter-whitelist", function() {
             });
         });
 
-        it("should messages is not ignored", function() {
+        it("should messages is not ignored", function () {
             const textlint = new TextLintCore();
             textlint.setupRules(
                 {
-                    report: reportRule
+                    report: reportRule,
                 },
                 {
                     report: {
-                        nodeTypes: [ASTNodeTypes.Code]
-                    }
+                        nodeTypes: [ASTNodeTypes.Code],
+                    },
                 }
             );
             textlint.setupFilterRules(
                 {
-                    whitelist: filterRule
+                    allowlist: filterRule,
                 },
                 {
-                    whitelist: {
+                    allowlist: {
                         // not regExp
-                        allow: ["`\\d+`"]
-                    }
+                        allow: ["`\\d+`"],
+                    },
                 }
             );
             return textlint.lintMarkdown("white `1234` text").then(({ messages }) => {
                 assert.equal(messages.length, 1);
             });
         });
-        it("should messages is ignore by RegExp", function() {
+        it("should messages is ignore by RegExp", function () {
             const textlint = new TextLintCore();
             textlint.setupRules(
                 {
-                    report: reportRule
+                    report: reportRule,
                 },
                 {
                     report: {
-                        nodeTypes: [ASTNodeTypes.Code]
-                    }
+                        nodeTypes: [ASTNodeTypes.Code],
+                    },
                 }
             );
             textlint.setupFilterRules(
                 {
-                    whitelist: filterRule
+                    allowlist: filterRule,
                 },
                 {
-                    whitelist: {
-                        allow: ["/`\\d+`/"]
-                    }
+                    allowlist: {
+                        allow: ["/`\\d+`/"],
+                    },
                 }
             );
             return textlint.lintMarkdown("white `1234` text").then(({ messages }) => {
@@ -171,26 +171,26 @@ describe("textlint-rule-filter-whitelist", function() {
             });
         });
 
-        it("should messages is ignore by RegExp + flag", function() {
+        it("should messages is ignore by RegExp + flag", function () {
             const textlint = new TextLintCore();
             textlint.setupRules(
                 {
-                    report: reportRule
+                    report: reportRule,
                 },
                 {
                     report: {
-                        nodeTypes: [ASTNodeTypes.Paragraph]
-                    }
+                        nodeTypes: [ASTNodeTypes.Paragraph],
+                    },
                 }
             );
             textlint.setupFilterRules(
                 {
-                    whitelist: filterRule
+                    allowlist: filterRule,
                 },
                 {
-                    whitelist: {
-                        allow: ["/^={1,4}\\s/m", "This is not error."]
-                    }
+                    allowlist: {
+                        allow: ["/^={1,4}\\s/m", "This is not error."],
+                    },
                 }
             );
             return textlint
@@ -204,26 +204,26 @@ describe("textlint-rule-filter-whitelist", function() {
                     });
                 });
         });
-        it("should support multiline", function() {
+        it("should support multiline", function () {
             const textlint = new TextLintCore();
             textlint.setupRules(
                 {
-                    report: reportRule
+                    report: reportRule,
                 },
                 {
                     report: {
-                        nodeTypes: [ASTNodeTypes.Paragraph]
-                    }
+                        nodeTypes: [ASTNodeTypes.Paragraph],
+                    },
                 }
             );
             textlint.setupFilterRules(
                 {
-                    whitelist: filterRule
+                    allowlist: filterRule,
                 },
                 {
-                    whitelist: {
-                        allow: ["/===IGNORE===[\\s\\S]*?===/IGNORE===/m"]
-                    }
+                    allowlist: {
+                        allow: ["/===IGNORE===[\\s\\S]*?===/IGNORE===/m"],
+                    },
                 }
             );
             return textlint
@@ -236,26 +236,26 @@ ERROR Text, But this range should be ignored!
                     assert.equal(messages.length, 0);
                 });
         });
-        it("should support Math extension", function() {
+        it("should support Math extension", function () {
             const textlint = new TextLintCore();
             textlint.setupRules(
                 {
-                    report: reportRule
+                    report: reportRule,
                 },
                 {
                     report: {
-                        nodeTypes: [ASTNodeTypes.Paragraph]
-                    }
+                        nodeTypes: [ASTNodeTypes.Paragraph],
+                    },
                 }
             );
             textlint.setupFilterRules(
                 {
-                    whitelist: filterRule
+                    allowlist: filterRule,
                 },
                 {
-                    whitelist: {
-                        allow: ["/\\$\\$[\\s\\S]*?\\$\\$/m"]
-                    }
+                    allowlist: {
+                        allow: ["/\\$\\$[\\s\\S]*?\\$\\$/m"],
+                    },
                 }
             );
             return textlint
@@ -272,26 +272,26 @@ $$`
                     assert.equal(messages.length, 0);
                 });
         });
-        it("should messages is ignore by RegExp", function() {
+        it("should messages is ignore by RegExp", function () {
             const textlint = new TextLintCore();
             textlint.setupRules(
                 {
-                    report: reportRule
+                    report: reportRule,
                 },
                 {
                     report: {
-                        nodeTypes: [ASTNodeTypes.Str]
-                    }
+                        nodeTypes: [ASTNodeTypes.Str],
+                    },
                 }
             );
             textlint.setupFilterRules(
                 {
-                    whitelist: filterRule
+                    allowlist: filterRule,
                 },
                 {
-                    whitelist: {
-                        allow: ["/{{.*?}}/"]
-                    }
+                    allowlist: {
+                        allow: ["/{{.*?}}/"],
+                    },
                 }
             );
             return textlint.lintMarkdown("{{book.console}}").then(({ messages }) => {
@@ -299,26 +299,26 @@ $$`
             });
         });
 
-        it("should messages is ignore by RegExp", function() {
+        it("should messages is ignore by RegExp", function () {
             const textlint = new TextLintCore();
             textlint.setupRules(
                 {
-                    report: reportRule
+                    report: reportRule,
                 },
                 {
                     report: {
-                        nodeTypes: [ASTNodeTypes.Str]
-                    }
+                        nodeTypes: [ASTNodeTypes.Str],
+                    },
                 }
             );
             textlint.setupFilterRules(
                 {
-                    whitelist: filterRule
+                    allowlist: filterRule,
                 },
                 {
-                    whitelist: {
-                        allow: ["/#.*{#[a-z.-]+}/g"]
-                    }
+                    allowlist: {
+                        allow: ["/#.*{#[a-z.-]+}/g"],
+                    },
                 }
             );
             return textlint
