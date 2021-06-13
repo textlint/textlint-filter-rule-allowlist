@@ -1,7 +1,8 @@
-const path = require("path");
-const { rcFile } = require("rc-config-loader");
-const { getConfigBaseDir } = require("@textlint/get-config-base-dir");
-const { matchPatterns } = require("@textlint/regexp-string-matcher");
+import path from "path";
+import { rcFile } from "rc-config-loader";
+import { getConfigBaseDir } from "@textlint/get-config-base-dir";
+import { matchPatterns } from "@textlint/regexp-string-matcher";
+
 const getAllowWordsFromFiles = (files, baseDirectory) => {
     let results = [];
     files.forEach((filePath) => {
@@ -34,7 +35,7 @@ const defaultOptions = {
      */
     allowlistConfigPaths: []
 };
-module.exports = function(context, options) {
+export default function (context, options) {
     const { Syntax, shouldIgnore, getSource } = context;
     const baseDirectory = getConfigBaseDir(context) || process.cwd();
     const allowWords = options.allow || defaultOptions.allow;
@@ -51,4 +52,4 @@ module.exports = function(context, options) {
             });
         }
     };
-};
+}
