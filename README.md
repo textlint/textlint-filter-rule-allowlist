@@ -33,7 +33,7 @@ Via `.textlintrc`(Recommended)
 - `allowlistConfigPaths`: `string[]`
     - File path list that includes allow words.
     - The File path is relative path from your `.textlintrc`.
-    - Support file format: JSON, yml, js
+    - Support file format: JSON, yml
 
 For example, you can specify `allowlistConfigPaths` to `.textlintrc`.
 
