@@ -4,17 +4,18 @@ import { getConfigBaseDir } from "@textlint/get-config-base-dir";
 import { matchPatterns } from "@textlint/regexp-string-matcher";
 
 const loadAllowlistConfigFile = (baseDirectory, filePath) => {
+    // It is for suppoting browser bundler.
     const fs = require("fs");
     const configFilePath = path.resolve(baseDirectory, filePath);
     const extName = path.extname(configFilePath);
     const configFile = fs.readFileSync(configFilePath);
     let config = null;
     if (extName == ".json") {
-        config = JSON.parse(configFile);
-    } else if (/\.(yml|yaml)/.test(extName)) {
-        config = yaml.load(configFile);
+        return JSON.parse(configFile);
+    } else if (/\.(yml|yaml)$/.test(extName)) {
+        return yaml.load(configFile);
     } else {
-        return null;
+        throw new Error(`Unsupported file type: ${filePath}`);
     }
     return config;
 };
