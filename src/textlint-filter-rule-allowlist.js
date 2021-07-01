@@ -9,15 +9,12 @@ const loadAllowlistConfigFile = (baseDirectory, filePath) => {
     const configFilePath = path.resolve(baseDirectory, filePath);
     const extName = path.extname(configFilePath);
     const configFile = fs.readFileSync(configFilePath);
-    let config = null;
     if (extName == ".json") {
         return JSON.parse(configFile);
     } else if (/\.(yml|yaml)$/.test(extName)) {
         return yaml.load(configFile);
-    } else {
-        throw new Error(`Unsupported file type: ${filePath}`);
     }
-    return config;
+    throw new Error(`Unsupported file type: ${filePath}`);
 };
 
 const getAllowWordsFromFiles = (files, baseDirectory) => {
