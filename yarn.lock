@@ -2736,7 +2736,7 @@ js-yaml@4.0.0:
   dependencies:
     argparse "^2.0.1"
 
-js-yaml@4.1.0, js-yaml@^4.0.0:
+js-yaml@4.1.0, js-yaml@^4.1.0:
   version "4.1.0"
   resolved "https://registry.yarnpkg.com/js-yaml/-/js-yaml-4.1.0.tgz#c1fb65f8f5017901cdd2c951864ba18458a10602"
   integrity sha512-wpxZs9NoxZaJESJGIZTyDEaYpl0FKSA+FB9aJiyemKhMwkxQg63h4T1KJgUGHpTqPDNRcmmYLugrRjJlBtWvRA==
@@ -3882,16 +3882,6 @@ rc-config-loader@^3.0.0:
     debug "^4.1.1"
     js-yaml "^3.12.0"
     json5 "^2.1.1"
-    require-from-string "^2.0.2"
-
-rc-config-loader@^4.0.0:
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/rc-config-loader/-/rc-config-loader-4.0.0.tgz#144cf31961c9f8ebcf252bd9c263fd40d62bd387"
-  integrity sha512-//LRTblJEcqbmmro1GCmZ39qZXD+JqzuD8Y5/IZU3Dhp3A1Yr0Xn68ks8MQ6qKfKvYCWDveUmRDKDA40c+sCXw==
-  dependencies:
-    debug "^4.1.1"
-    js-yaml "^4.0.0"
-    json5 "^2.1.2"
     require-from-string "^2.0.2"
 
 read-pkg-up@^1.0.1:

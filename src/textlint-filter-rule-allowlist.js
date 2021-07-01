@@ -1,17 +1,28 @@
 import path from "path";
-import { rcFile } from "rc-config-loader";
+import yaml from "js-yaml";
 import { getConfigBaseDir } from "@textlint/get-config-base-dir";
 import { matchPatterns } from "@textlint/regexp-string-matcher";
+
+const loadAllowlistConfigFile = (baseDirectory, filePath) => {
+    // It is for suppoting browser bundler.
+    const fs = require("fs");
+    const configFilePath = path.resolve(baseDirectory, filePath);
+    const extName = path.extname(configFilePath);
+    const configFile = fs.readFileSync(configFilePath);
+    if (extName == ".json") {
+        return JSON.parse(configFile);
+    } else if (/\.(yml|yaml)$/.test(extName)) {
+        return yaml.load(configFile);
+    }
+    throw new Error(`Unsupported file type: ${filePath}`);
+};
 
 const getAllowWordsFromFiles = (files, baseDirectory) => {
     let results = [];
     files.forEach((filePath) => {
-        // TODO: use other loader
-        const contents = rcFile("file", {
-            configFileName: path.resolve(baseDirectory, filePath)
-        });
-        if (contents && Array.isArray(contents.config)) {
-            results = results.concat(contents.config);
+        const config = loadAllowlistConfigFile(baseDirectory, filePath);
+        if (config && Array.isArray(config)) {
+            results = results.concat(config);
         } else {
             throw new Error(`This allow file is not allow word list: ${filePath}`);
         }
