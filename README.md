@@ -34,6 +34,7 @@ Via `.textlintrc`(Recommended)
     - File path list that includes allow words.
     - The File path is relative path from your `.textlintrc`.
     - Support file format: JSON, yml
+    - Cannot use when using [@textlint/editor](https://github.com/textlint/editor)
 
 For example, you can specify `allowlistConfigPaths` to `.textlintrc`.
 
