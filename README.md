@@ -94,7 +94,7 @@ For example, you want to ignore error about `/github/i`, you can write `allow` a
 `allow.json`:
 ```
 [
-  "/github/i`
+  "/github/i"
 ]
 ```
 
@@ -108,7 +108,7 @@ You want to ignore error between `===IGNORE===` mark.
 `allow.json`:
 ```
 [
-  "/===IGNORE===[\\s\\S]*?===/IGNORE===/m`
+  "/===IGNORE===[\\s\\S]*?===/IGNORE===/m"
 ]
 ```
 
